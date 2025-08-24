@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlackFang Intelligence - Competitive Intelligence Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">
+                    ⚡ <span class="logo-text">BLACKFANG INTELLIGENCE</span>
+                </div>
+                <p class="login-subtitle">Professional Competitive Intelligence Platform</p>
+            </div>
+            
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                
+                <div id="loginError" class="login-error hidden"></div>
+                
+                <button type="submit" class="btn btn--primary btn--full-width">
+                    <span class="login-btn-text">Sign In to Platform</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                
+                <div class="demo-credentials">
+                    <p><strong>Demo Credentials:</strong></p>
+                    <p>Email: demo@blackfangintel.com</p>
+                    <p>Password: demo123</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="mainApp" class="main-app hidden">
+        <!-- Navigation Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">
+                        ⚡ <span class="logo-text">BLACKFANG INTELLIGENCE</span>
+                    </div>
+                </div>
+                
+                <nav class="main-nav">
+                    <button class="nav-btn active" data-section="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </button>
+                    <button class="nav-btn" data-section="competitors">
+                        <i class="fas fa-users"></i>
+                        <span>Competitors</span>
+                    </button>
+                    <button class="nav-btn" data-section="alerts">
+                        <i class="fas fa-bell"></i>
+                        <span>Alerts</span>
+                        <span id="alertBadge" class="nav-badge">4</span>
+                    </button>
+                    <button class="nav-btn" data-section="reports">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Reports</span>
+                    </button>
+                    <button class="nav-btn" data-section="settings">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </button>
+                </nav>
+                
+                <div class="header-actions">
+                    <button id="refreshBtn" class="btn btn--secondary">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                    <button id="logoutBtn" class="btn btn--outline">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Section -->
+        <section id="dashboardSection" class="main-section active">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Intelligence Dashboard</h1>
+                    <p class="section-subtitle">Real-time competitive intelligence and threat monitoring</p>
+                    <div class="last-update">Last updated: <span id="lastUpdateTime"></span></div>
+                </div>
+                
+                <!-- Statistics Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">3</h3>
+                            <p class="stat-label">Competitors Monitored</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon alert">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">8</h3>
+                            <p class="stat-label">Active Alerts</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon critical">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">1</h3>
+                            <p class="stat-label">Critical Priority</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon monitoring">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">24/7</h3>
+                            <p class="stat-label">Monitoring</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Critical Alerts -->
+                <div class="dashboard-section">
+                    <h2 class="section-title">⚡ Critical Threat Intelligence</h2>
+                    <div id="criticalAlerts" class="critical-alerts">
+                        <!-- Critical alerts will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Competitor Network -->
+                <div class="dashboard-section">
+                    <h2 class="section-title">🎯 Competitor Intelligence Network</h2>
+                    <div id="competitorNetwork" class="competitor-network">
+                        <!-- Competitor cards will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Competitors Section -->
+        <section id="competitorsSection" class="main-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Competitor Management</h1>
+                    <p class="section-subtitle">Monitor and analyze competitive threats in real-time</p>
+                </div>
+                
+                <div class="competitors-list">
+                    <div class="list-header">
+                        <h3>Monitored Competitors</h3>
+                        <button class="btn btn--primary">
+                            <i class="fas fa-plus"></i>
+                            Add Competitor
+                        </button>
+                    </div>
+                    
+                    <div id="competitorsList" class="competitors-grid">
+                        <!-- Competitor cards will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alerts Section -->
+        <section id="alertsSection" class="main-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Threat Alerts</h1>
+                    <p class="section-subtitle">Strategic intelligence alerts and recommendations</p>
+                </div>
+                
+                <div class="alerts-controls">
+                    <div class="alert-filters">
+                        <button class="filter-btn active" data-filter="all">All Alerts</button>
+                        <button class="filter-btn" data-filter="HIGH">High Priority</button>
+                        <button class="filter-btn" data-filter="MEDIUM">Medium Priority</button>
+                        <button class="filter-btn" data-filter="LOW">Low Priority</button>
+                    </div>
+                    
+                    <button id="markAllReadBtn" class="btn btn--secondary">
+                        <i class="fas fa-check"></i>
+                        Mark All Read
+                    </button>
+                </div>
+                
+                <div id="alertsList" class="alerts-list">
+                    <!-- Alerts will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Reports Section -->
+        <section id="reportsSection" class="main-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Intelligence Reports</h1>
+                    <p class="section-subtitle">Comprehensive competitive analysis and insights</p>
+                </div>
+                
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <h3>Weekly Competitor Analysis</h3>
+                        <p>Comprehensive analysis of competitor activities and market movements</p>
+                        <div class="report-meta">
+                            <span>Generated: Aug 24, 2025</span>
+                            <button class="btn btn--outline">Download PDF</button>
+                        </div>
+                    </div>
+                    
+                    <div class="report-card">
+                        <h3>Threat Assessment Summary</h3>
+                        <p>Strategic risk assessment and competitive threat evaluation</p>
+                        <div class="report-meta">
+                            <span>Generated: Aug 23, 2025</span>
+                            <button class="btn btn--outline">Download PDF</button>
+                        </div>
+                    </div>
+                    
+                    <div class="report-card">
+                        <h3>Market Intelligence Brief</h3>
+                        <p>Industry trends and competitive positioning analysis</p>
+                        <div class="report-meta">
+                            <span>Generated: Aug 22, 2025</span>
+                            <button class="btn btn--outline">Download PDF</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settingsSection" class="main-section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Platform Settings</h1>
+                    <p class="section-subtitle">Configure your intelligence monitoring preferences</p>
+                </div>
+                
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>Account Information</h3>
+                        <div class="setting-item">
+                            <label>Company Name</label>
+                            <input type="text" class="form-control" value="Demo Motors Pvt Ltd" readonly>
+                        </div>
+                        <div class="setting-item">
+                            <label>Email</label>
+                            <input type="email" class="form-control" value="demo@blackfangintel.com" readonly>
+                        </div>
+                        <div class="setting-item">
+                            <label>Subscription Plan</label>
+                            <span class="status status--success">Professional - ₹45,000/month</span>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3>Monitoring Preferences</h3>
+                        <div class="setting-item">
+                            <label>Alert Frequency</label>
+                            <select class="form-control">
+                                <option>Real-time</option>
+                                <option>Hourly</option>
+                                <option>Daily</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>Threat Level Threshold</label>
+                            <select class="form-control">
+                                <option>All Levels</option>
+                                <option>Medium and High</option>
+                                <option>High Only</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3>Notifications</h3>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                Email Alerts
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                SMS Notifications
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                Dashboard Notifications
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

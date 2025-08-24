@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}BlackFang Intelligence{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', path='css/main.css') }}">
+    
+    <!-- Additional Stylesheets -->
+    {% block stylesheets %}{% endblock %}
+    
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="{% block description %}Professional competitive intelligence platform for SMBs{% endblock %}">
+    <meta name="keywords" content="competitive intelligence, business intelligence, competitor monitoring, market analysis">
+    <meta name="author" content="BlackFang Intelligence">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{% block og_title %}BlackFang Intelligence{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Professional competitive intelligence platform{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ url_for('static', path='images/logo.png') }}">
+    
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="{{ url_for('static', path='css/main.css') }}" as="style">
+    <link rel="preload" href="{{ url_for('static', path='js/app.js') }}" as="script">
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Loading BlackFang Intelligence...</p>
+        </div>
+    </div>
+    
+    <!-- Navigation Header -->
+    {% block header %}
+    <header class="main-header">
+        <div class="header-content">
+            <div class="brand-section">
+                <a href="{{ url_for('root') }}" class="brand-link">
+                    <div class="brand-logo">⚡ BLACKFANG INTELLIGENCE</div>
+                </a>
+            </div>
+            
+            {% block nav_items %}
+            <nav class="main-nav">
+                <a href="{{ url_for('root') }}" class="nav-item">Home</a>
+                <a href="{{ url_for('login_page') }}" class="nav-item">Login</a>
+                <a href="/api/docs" class="nav-item" target="_blank">API Docs</a>
+            </nav>
+            {% endblock %}
+        </div>
+    </header>
+    {% endblock %}
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    {% block footer %}
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="brand-logo">⚡ BLACKFANG INTELLIGENCE</div>
+                <p>Professional competitive intelligence platform for SMBs</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="{{ url_for('login_page') }}">Login</a></li>
+                    <li><a href="/health">System Status</a></li>
+                    <li><a href="/api/docs">API Documentation</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="mailto:support@blackfangintel.com">Email Support</a></li>
+                    <li><a href="tel:+911234567890">Phone Support</a></li>
+                    <li><a href="#">Documentation</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Business</h4>
+                <ul>
+                    <li><a href="#">Pricing Plans</a></li>
+                    <li><a href="#">Case Studies</a></li>
+                    <li><a href="#">Enterprise</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 BlackFang Intelligence. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Security</a>
+            </div>
+        </div>
+    </footer>
+    {% endblock %}
+    
+    <!-- Core JavaScript -->
+    <script src="{{ url_for('static', path='js/app.js') }}"></script>
+    
+    <!-- Page-specific JavaScript -->
+    {% block scripts %}{% endblock %}
+    
+    <!-- Global Utilities -->
+    <script>
+        // Global configuration
+        window.BlackFangConfig = {
+            apiBase: '',
+            version: '2.0.0',
+            environment: '{{ settings.ENVIRONMENT }}',
+            demoMode: {{ 'true' if settings.DEMO_ACCOUNT_ENABLED else 'false' }}
+        };
+        
+        // Global error handling
+        window.addEventListener('error', function(e) {
+            console.error('Global error:', e.error);
+        });
+        
+        // Global unhandled promise rejection handling
+        window.addEventListener('unhandledrejection', function(e) {
+            console.error('Unhandled promise rejection:', e.reason);
+        });
+        
+        // Show loading overlay
+        function showGlobalLoading(show = true) {
+            const overlay = document.getElementById('loading-overlay');
+            if (overlay) {
+                overlay.style.display = show ? 'flex' : 'none';
+            }
+        }
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎯 BlackFang Intelligence v2.0.0 - Initialized');
+        });
+    </script>
+</body>
+</html>
